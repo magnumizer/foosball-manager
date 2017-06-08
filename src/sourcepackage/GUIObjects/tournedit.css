@@ -1,0 +1,17 @@
+.date-picker .text-field {
+    -fx-font: 11px "System";
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+    -fx-padding: 0 0 0 60;
+}
+.choice-box
+{
+    -fx-font-size: 11px;
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+    -fx-padding: 0 0 0 15;
+}
+.choice-box-base > *.arrow-button
+{
+    -fx-padding: 0 15 0 0;
+}

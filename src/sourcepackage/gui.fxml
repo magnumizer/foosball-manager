@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.media.MediaView?>
+
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sourcepackage.Controller">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="1024.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#injectVirus" text="Inject virus">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              <MenuItem fx:id="closeBtn" mnemonicParsing="false" onAction="#closeProgram" text="Close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleDelete" text="Delete">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#openAboutPane" text="About">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F12" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="25.0" prefWidth="1024.0" text="Foosball Manager" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="21.0" />
+         </font>
+      </Label>
+      <Pane layoutX="114.0" prefHeight="25.0" prefWidth="910.0">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="852.0" mnemonicParsing="false" onAction="#minimizeProgram" prefHeight="0.0" prefWidth="29.0" text="—">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="881.0" mnemonicParsing="false" onAction="#closeProgram" prefHeight="0.0" prefWidth="29.0" text="X" />
+         </children>
+      </Pane>
+      <TabPane layoutY="24.0" prefHeight="744.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="120.0" tabMinWidth="324.0">
+        <tabs>
+          <Tab fx:id="playersTab" text="Players">
+               <content>
+                  <AnchorPane fx:id="playersTabContent" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="641.0" prefWidth="1009.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="40.0">
+                           <children>
+                              <TableView fx:id="playerTable" prefHeight="400.0" prefWidth="929.0">
+                                <columns>
+                                  <TableColumn fx:id="rankCol" editable="false" maxWidth="0.0" minWidth="55.0" prefWidth="0.0" resizable="false" text="#Rank" />
+                                  <TableColumn fx:id="nameCol" editable="false" maxWidth="0.0" minWidth="350.0" prefWidth="0.0" resizable="false" text="Name" />
+                                    <TableColumn fx:id="dateOfBirthCol" editable="false" maxWidth="0.0" minWidth="200.0" prefWidth="0.0" resizable="false" text="Date of birth" />
+                                    <TableColumn fx:id="emailCol" editable="false" maxWidth="0.0" minWidth="308.0" prefWidth="0.0" resizable="false" text="E-mail" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <Button mnemonicParsing="false" onAction="#openPlayerCreate" text="+ New Player" translateY="400.0" />
+                              <Button fx:id="editPlayerBtn" disable="true" layoutX="92.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openPlayerEdit" prefHeight="25.0" prefWidth="60.0" text="Edit" />
+                              <Button fx:id="deletePlayerBtn" disable="true" layoutX="157.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="25.0" prefWidth="60.0" text="Delete" />
+                              <Button layoutX="222.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#refreshPlayerTable" prefHeight="25.0" prefWidth="60.0" text="Refresh" />
+                              <TitledPane fx:id="newPlayerPanel" animated="false" collapsible="false" disable="true" layoutY="399.0" prefHeight="145.0" prefWidth="930.0" text="Create a new Player" visible="false">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="37.0" layoutY="20.0" prefHeight="25.0" prefWidth="188.0" text="Name">
+                                             <font>
+                                                <Font name="System Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="playerNameTextField" layoutX="34.0" layoutY="45.0" prefHeight="33.0" prefWidth="188.0" promptText="Type a name" />
+                                          <Label alignment="CENTER" layoutX="231.0" layoutY="20.0" prefHeight="25.0" prefWidth="188.0" text="Date of birth">
+                                             <font>
+                                                <Font name="System Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker fx:id="playerBirthdayField" layoutX="231.0" layoutY="45.0" prefHeight="33.0" prefWidth="188.0" promptText="Select a date" />
+                                          <Label alignment="CENTER" layoutX="429.0" layoutY="20.0" prefHeight="25.0" prefWidth="188.0" text="E-mail">
+                                             <font>
+                                                <Font name="System Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="playerEmailTextField" layoutX="428.0" layoutY="45.0" prefHeight="33.0" prefWidth="188.0" promptText="Type an e-mail address" />
+                                          <Button layoutX="680.0" layoutY="45.0" mnemonicParsing="false" onAction="#addPlayerToList" prefHeight="33.0" prefWidth="100.0" text="Add to list" />
+                                          <Button layoutX="800.0" layoutY="45.0" mnemonicParsing="false" onAction="#hideNewPlayerPanel" prefHeight="33.0" prefWidth="100.0" text="Cancel" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </TitledPane>
+                              <TitledPane fx:id="editPlayerPanel" animated="false" collapsible="false" disable="true" layoutY="399.0" prefHeight="145.0" prefWidth="930.0" text="Edit Player" visible="false">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="37.0" layoutY="20.0" prefHeight="25.0" prefWidth="188.0" text="Name">
+                                             <font>
+                                                <Font name="System Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="playerNameTextFieldEdit" layoutX="34.0" layoutY="45.0" prefHeight="33.0" prefWidth="188.0" promptText="Type a name" />
+                                          <Label alignment="CENTER" layoutX="231.0" layoutY="20.0" prefHeight="25.0" prefWidth="188.0" text="Date of birth">
+                                             <font>
+                                                <Font name="System Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker fx:id="playerBirthdayFieldEdit" layoutX="231.0" layoutY="45.0" prefHeight="33.0" prefWidth="188.0" promptText="Select a date" />
+                                          <Label alignment="CENTER" layoutX="429.0" layoutY="20.0" prefHeight="25.0" prefWidth="188.0" text="E-mail">
+                                             <font>
+                                                <Font name="System Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="playerEmailTextFieldEdit" layoutX="428.0" layoutY="45.0" prefHeight="33.0" prefWidth="188.0" promptText="Type an e-mail address" />
+                                          <Button layoutX="680.0" layoutY="45.0" mnemonicParsing="false" onAction="#updatePlayer" prefHeight="33.0" prefWidth="100.0" text="Update info" />
+                                          <Button layoutX="800.0" layoutY="45.0" mnemonicParsing="false" onAction="#hideEditPlayerPanel" prefHeight="33.0" prefWidth="100.0" text="Cancel" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets left="40.0" right="40.0" top="40.0" />
+                           </opaqueInsets>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab fx:id="teamsTab" text="Teams">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="617.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane fx:id="teamGridParent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1009.0">
+                                 <children>
+                                    <GridPane fx:id="teamGrid" gridLinesVisible="true" layoutX="-150.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1009.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="200.0" prefHeight="220.0" vgrow="NEVER" />
+                                      </rowConstraints>
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" top="40.0" />
+                                       </padding>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <children>
+                                          <Button fx:id="addTeamBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newTeam" text="+ ADD TEAM" textAlignment="CENTER" translateX="25.0">
+                                             <font>
+                                                <Font size="36.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Button>
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="matchesTab" text="Matches">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fx:id="tournamentList" prefHeight="617.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane fx:id="tournamentGridParent" minHeight="0.0" minWidth="0.0" prefHeight="348.0" prefWidth="1009.0">
+                                 <children>
+                                    <GridPane fx:id="tournamentGrid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="1009.0">
+                                       <children>
+                                          <Button fx:id="addTournamentBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newTournament" text="+ NEW TOURNAMENT" textAlignment="CENTER" translateX="18.0">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Button>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" top="40.0" />
+                                       </padding>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="200.0" prefHeight="220.0" vgrow="NEVER" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <Pane fx:id="bracket" disable="true" visible="false">
+                           <children>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="1024.0">
+                                 <children>
+                                    <Label fx:id="tournamentLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="1024.0" text="Tournament 1">
+                                       <font>
+                                          <Font name="System Bold" size="32.0" />
+                                       </font>
+                                    </Label>
+                                    <Button mnemonicParsing="false" onAction="#hideBracket" text="&lt;- Back" textAlignment="CENTER" textFill="#3c3c3c" translateX="20.0" translateY="10.0">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Button>
+                                    <TabPane fx:id="tournamentTabPane" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="156.0" AnchorPane.bottomAnchor="142.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
+                                      <tabs>
+                                        <Tab fx:id="tab32" disable="true" text="Round of 32">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="table32" prefHeight="384.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="matchDateCol32" prefWidth="123.0" resizable="false" text="Match date" />
+                                                          <TableColumn fx:id="team1Col32" prefWidth="235.0" resizable="false" text="Team 1" />
+                                                            <TableColumn fx:id="score1Col32" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="team2Col32" prefWidth="235.0" resizable="false" text="Team 2" />
+                                                            <TableColumn fx:id="score2Col32" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="winnerCol32" editable="false" prefWidth="236.0" resizable="false" text="Winner" />
+                                                        </columns>
+                                                      </TableView>
+                                                      <Line endX="163.0" endY="385.0" startX="163.0" startY="41.0" />
+                                                      <Line endX="449.0" endY="385.0" startX="449.0" startY="41.0" />
+                                                      <Line endX="734.0" endY="385.0" startX="734.0" startY="41.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab fx:id="tab16" disable="true" text="Round of 16">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="table16" prefHeight="384.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="matchDateCol16" prefWidth="123.0" resizable="false" text="Match date" />
+                                                            <TableColumn fx:id="team1Col16" prefWidth="235.0" resizable="false" text="Team 1" />
+                                                            <TableColumn fx:id="score1Col16" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="team2Col16" prefWidth="235.0" resizable="false" text="Team 2" />
+                                                            <TableColumn fx:id="score2Col16" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="winnerCol16" prefWidth="236.0" resizable="false" text="Winner" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <Line endX="163.0" endY="385.0" startX="163.0" startY="41.0" />
+                                                      <Line endX="734.0" endY="385.0" startX="734.0" startY="41.0" />
+                                                      <Line endX="449.0" endY="385.0" startX="449.0" startY="41.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="tab8" disable="true" text="Round of 8">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="table8" prefHeight="384.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="matchDateCol8" prefWidth="123.0" resizable="false" text="Match date" />
+                                                            <TableColumn fx:id="team1Col8" prefWidth="235.0" resizable="false" text="Team 1" />
+                                                            <TableColumn fx:id="score1Col8" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="team2Col8" prefWidth="235.0" resizable="false" text="Team 2" />
+                                                            <TableColumn fx:id="score2Col8" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="winnerCol8" prefWidth="236.0" resizable="false" text="Winner" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <Line endX="163.0" endY="385.0" startX="163.0" startY="41.0" />
+                                                      <Line endX="734.0" endY="385.0" startX="734.0" startY="41.0" />
+                                                      <Line endX="449.0" endY="385.0" startX="449.0" startY="41.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="tab4" disable="true" text="Quarterfinal">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="table4" prefHeight="384.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="matchDateCol4" prefWidth="123.0" resizable="false" text="Match date" />
+                                                            <TableColumn fx:id="team1Col4" prefWidth="235.0" resizable="false" text="Team 1" />
+                                                            <TableColumn fx:id="score1Col4" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="team2Col4" prefWidth="235.0" resizable="false" text="Team 2" />
+                                                            <TableColumn fx:id="score2Col4" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="winnerCol4" prefWidth="236.0" resizable="false" text="Winner" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <Line endX="163.0" endY="385.0" startX="163.0" startY="41.0" />
+                                                      <Line endX="449.0" endY="385.0" startX="449.0" startY="41.0" />
+                                                      <Line endX="734.0" endY="385.0" startX="734.0" startY="41.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="tab2" disable="true" text="Semi-final">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="table2" prefHeight="384.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="matchDateCol2" prefWidth="123.0" resizable="false" text="Match date" />
+                                                            <TableColumn fx:id="team1Col2" prefWidth="235.0" resizable="false" text="Team 1" />
+                                                            <TableColumn fx:id="score1Col2" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="team2Col2" prefWidth="235.0" resizable="false" text="Team 2" />
+                                                            <TableColumn fx:id="score2Col2" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="winnerCol2" prefWidth="236.0" resizable="false" text="Winner" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <Line endX="734.0" endY="385.0" startX="734.0" startY="41.0" />
+                                                      <Line endX="163.0" endY="385.0" startX="163.0" startY="41.0" />
+                                                      <Line endX="449.0" endY="385.0" startX="449.0" startY="41.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="tab1" disable="true" text="Final">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="table1" prefHeight="384.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="matchDateCol1" prefWidth="123.0" resizable="false" text="Match date" />
+                                                            <TableColumn fx:id="team1Col1" prefWidth="235.0" resizable="false" text="Team 1" />
+                                                            <TableColumn fx:id="score1Col1" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="team2Col1" prefWidth="235.0" resizable="false" text="Team 2" />
+                                                            <TableColumn fx:id="score2Col1" prefWidth="50.0" resizable="false" text="Score" />
+                                                            <TableColumn fx:id="winnerCol1" prefWidth="236.0" resizable="false" text="Winner" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <Line endX="734.0" endY="385.0" startX="734.0" startY="41.0" />
+                                                      <Line endX="449.0" endY="385.0" startX="449.0" startY="41.0" />
+                                                      <Line endX="163.0" endY="385.0" startX="163.0" startY="41.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                    <Button layoutX="40.0" layoutY="474.0" mnemonicParsing="false" onAction="#openMatchEdit" text="Edit Match" />
+                                    <TitledPane fx:id="editMatchPanel" animated="false" collapsible="false" disable="true" layoutX="40.0" layoutY="474.0" prefHeight="130.0" prefWidth="944.0" stylesheets="@centerbox.css" text="Edit Match" visible="false">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER" layoutY="15.0" prefHeight="21.0" prefWidth="123.0" text="Match date">
+                                                   <font>
+                                                      <Font name="System Italic" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <DatePicker fx:id="dateMatchFieldEdit" layoutY="45.0" prefHeight="25.0" prefWidth="123.0" style="-fx-alignment: CENTER; -fx-content-display: CENTER;" />
+                                                <Label alignment="CENTER" layoutX="123.0" layoutY="15.0" prefHeight="21.0" prefWidth="235.0" text="Team 1">
+                                                   <font>
+                                                      <Font name="System Italic" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="team1MatchFieldEdit" layoutX="123.0" layoutY="45.0" prefWidth="235.0" style="-fx-alignment: CENTER; -fx-content-display: CENTER;" />
+                                                <Label alignment="CENTER" layoutX="358.0" layoutY="15.0" prefHeight="21.0" prefWidth="50.0" text="Score">
+                                                   <font>
+                                                      <Font name="System Italic" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="score1MatchFieldEdit" layoutX="358.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" style="-fx-alignment: CENTER; -fx-content-display: CENTER;" text="0" />
+                                                <Label alignment="CENTER" layoutX="408.0" layoutY="15.0" prefHeight="21.0" prefWidth="235.0" text="Team 2">
+                                                   <font>
+                                                      <Font name="System Italic" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="team2MatchFieldEdit" layoutX="408.0" layoutY="45.0" prefWidth="235.0" style="-fx-alignment: CENTER; -fx-content-display: CENTER;" />
+                                                <Label alignment="CENTER" layoutX="643.0" layoutY="15.0" prefHeight="21.0" prefWidth="50.0" text="Score">
+                                                   <font>
+                                                      <Font name="System Italic" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="score2MatchFieldEdit" layoutX="643.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" style="-fx-alignment: CENTER; -fx-content-display: CENTER;" text="0" />
+                                                <Button alignment="CENTER" layoutX="750.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#updateMatch" prefHeight="25.0" prefWidth="80.0" text="Submit" />
+                                                <Button alignment="CENTER" layoutX="850.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hideEditMatchPanel" prefHeight="25.0" prefWidth="80.0" text="Cancel" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Pane fx:id="aboutPane" disable="true" layoutX="256.0" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="512.0" style="-fx-background-color: grey; -fx-border-color: white; -fx-border-width: 10;" visible="false">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="512.0" style="-fx-background-color: white;" text="About">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Button layoutX="470.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeAboutPane" prefHeight="36.0" prefWidth="42.0" style="-fx-background-color: white;" text="X">
+               <font>
+                  <Font name="Palatino Linotype Bold" size="17.0" />
+               </font>
+            </Button>
+            <Label layoutX="69.0" layoutY="50.0" style="-fx-background-color: transparent;" text="Foosball Manager v0.1" textFill="WHITE">
+               <font>
+                  <Font name="DaunPenh" size="58.0" />
+               </font>
+            </Label>
+            <TextArea editable="false" layoutX="69.0" layoutY="160.0" mouseTransparent="true" prefHeight="312.0" prefWidth="374.0" text="Program name: Foosball Manager&#10;Program version: 0.1&#10;&#10;Purpose: School assignment&#10;Deadline: 30/04/2017&#10;School: KEA&#10;Class: Dat16i&#10;&#10;Created by: Magnus Svendsen">
+               <font>
+                  <Font name="Cordia New" size="24.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </TextArea>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="212.5" layoutY="510.0" mnemonicParsing="false" onAction="#closeAboutPane" style="-fx-background-color: white;" text="Close">
+               <font>
+                  <Font name="Segoe UI" size="23.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</Pane>

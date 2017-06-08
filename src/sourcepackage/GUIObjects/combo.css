@@ -1,0 +1,23 @@
+.combo-box-base
+{
+    -fx-padding: 0 0 0 12;
+}
+.combo-box-base > *.arrow-button
+{
+    -fx-padding: 0 5 0 0;
+}
+.combo-box .list-cell
+{
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+    -fx-padding: 0 0 0 10;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .track,
+.scroll-bar .thumb
+{
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+    -fx-background-insets: 0;
+}

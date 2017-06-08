@@ -1,0 +1,20 @@
+.combo-box-base
+{
+    -fx-padding: 0 0 0 30;
+}
+.combo-box .list-cell
+{
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+}
+.date-picker
+{
+    -fx-padding: 0 0 0 0;
+
+}
+.date-picker > .text-field
+{
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+    -fx-padding: 0 0 0 20;
+}
